@@ -29,7 +29,7 @@ public class GameContext
 		}
 		_services.Remove(key);
 	}
-	public T Get<T>() where T : IService
+	public T GetService<T>() where T : IService
 	{
 		string key = typeof(T).Name;
 		if (!_services.ContainsKey(key))

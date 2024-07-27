@@ -1,21 +1,29 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PointSaveLoader : ISaveLoader
 {
-	public void LoadService(GameContext gameContext)
+	private class PointData
 	{
-		if (PlayerPrefs.HasKey("Clicker/Score"))
+		public int Point;
+	}
+	public void LoadService(GameContext gameContext, IGameRepository repository)
+	{
+		if (repository.TryGetData(out PointData data))
 		{
-			int value = PlayerPrefs.GetInt("Clicker/Score");
-			var pointStorage = gameContext.Get<PointStorage>();
-			pointStorage.SetupPoint(value);
+			var pointStorage = gameContext.GetService<PointStorage>();
+			pointStorage.SetupPoint(data.Point);
+			
 		}
 	}
 
-	public void SaveService(GameContext gameContext)
+	public void SaveService(GameContext gameContext, IGameRepository repository)
 	{
-		var pointStorage = gameContext.Get<PointStorage>();
-		PlayerPrefs.SetInt("Clicker/Score", pointStorage.GetValue());
+		var pointStorage = gameContext.GetService<PointStorage>();
+		repository.SetData(new PointData()
+		{
+			Point = pointStorage.GetValue()
+		});
 	}
 }
