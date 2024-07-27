@@ -4,13 +4,11 @@ using System;
 
 public class GameContext
 {
-	private Dictionary<string, IService> _services = new(); 
-	public static GameContext Current { get; private set; }
-
-    public static void Initialize()
-    {
-        Current = new GameContext();
-    }
+	private readonly Dictionary<string, IService> _services; 
+	public GameContext()
+	{
+		_services = new();
+	}
 	public void Register<T>(T service) where T : IService
 	{
 		string key = typeof(T).Name;

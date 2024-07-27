@@ -1,14 +1,21 @@
 using System;
+using UnityEngine;
 
 public class PointSaveLoader : ISaveLoader
 {
-    void ISaveLoader.LoadGame()
-    {
-        throw new NotImplementedException();
-    }
+	public void LoadService(GameContext gameContext)
+	{
+		if (PlayerPrefs.HasKey("Clicker/Score"))
+		{
+			int value = PlayerPrefs.GetInt("Clicker/Score");
+			var pointStorage = gameContext.Get<PointStorage>();
+			pointStorage.SetupPoint(value);
+		}
+	}
 
-    void ISaveLoader.SaveGame()
-    {
-        throw new NotImplementedException();
-    }
+	public void SaveService(GameContext gameContext)
+	{
+		var pointStorage = gameContext.Get<PointStorage>();
+		PlayerPrefs.SetInt("Clicker/Score", pointStorage.GetValue());
+	}
 }
