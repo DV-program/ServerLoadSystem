@@ -1,29 +1,25 @@
 using System;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PointSaveLoader : ISaveLoader
-{
-	private class PointData
+public class PointData
 	{
 		public int Point;
 	}
-	public void LoadService(GameContext gameContext, IGameRepository repository)
-	{
-		if (repository.TryGetData(out PointData data))
+public class PointSaveLoader : SaveLoader<PointData, PointStorage>
+{
+    protected override PointData ConvertToData(PointStorage service)
+    {
+        return new PointData()
 		{
-			var pointStorage = gameContext.GetService<PointStorage>();
-			pointStorage.SetupPoint(data.Point);
-			
-		}
-	}
+			Point = service.GetValue()
+		};
+    }
 
-	public void SaveService(GameContext gameContext, IGameRepository repository)
-	{
-		var pointStorage = gameContext.GetService<PointStorage>();
-		repository.SetData(new PointData()
-		{
-			Point = pointStorage.GetValue()
-		});
-	}
+    protected override void SetupData(PointData data, PointStorage service)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-public class JsonToFileStorageService : IStorageService
+public class JsonToFileStorageService
 {
 	private bool _isInProgress = false;
 	public void Load<T>(string key, Action<T> callback = null)
