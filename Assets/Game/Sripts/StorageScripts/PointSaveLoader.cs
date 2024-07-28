@@ -20,6 +20,6 @@ public class PointSaveLoader : SaveLoader<PointData, PointStorage>
 
     protected override void SetupData(PointData data, PointStorage service)
     {
-        throw new NotImplementedException();
+        service.SetupPoint(data.Point);
     }
 }
