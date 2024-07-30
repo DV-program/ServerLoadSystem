@@ -12,6 +12,6 @@ public class ClickerBootstrap : MonoBehaviour
 		PointStorage pointStorage= new PointStorage();
 		_pointView.Initialize();
 		PointModel pointModel = new PointModel(_pointView, pointStorage);
-		PointController pointController= new PointController(pointModel,_clickButton);
+		ButtonController pointController= new ButtonController(pointModel,_clickButton);
 	}
 }

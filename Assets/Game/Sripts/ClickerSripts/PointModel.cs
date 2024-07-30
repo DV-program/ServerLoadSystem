@@ -1,6 +1,6 @@
 using System.Drawing;
 using UnityEngine;
-public class PointModel 
+public class PointModel : IButtonModel
 {
 	private PointView _pointView;
 	private PointStorage _pointStorage;
@@ -10,7 +10,7 @@ public class PointModel
 		_pointView = pointView;
 		_pointView.Display(_pointStorage.GetValue());
 	}
-	public void SetPlusPoint()
+    public void OnClicked()
 	{
 		_pointStorage.PlusPoint();
 		_pointView.Display(_pointStorage.GetValue());
