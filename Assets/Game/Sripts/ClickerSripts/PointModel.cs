@@ -10,7 +10,7 @@ public class PointModel : IButtonModel
 		_pointView = pointView;
 		_pointView.Display(_pointStorage.GetValue());
 	}
-	public void OnClicked()
+    public void OnClicked()
 	{
 		_pointStorage.PlusPoint();
 		_pointView.Display(_pointStorage.GetValue());
